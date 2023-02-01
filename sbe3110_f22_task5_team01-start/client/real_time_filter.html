@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lib/danfo.min.js"></script>
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/plotly-2.8.3.min.js"></script>
+    <script src="lib/notyf.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="lib/notfy.min.css" />
+    <title>Real time Filter</title>
+</head>
+
+<body>
+    <section id="real-time-filter">
+        <div class="box" id="real-time-filter-container">
+            <h2 id="real-time-title" class="title">Real Time Filtering</h2>
+            <input class="btn" type="file" id="csvFile" accept=".csv" />
+            <button class="btn" value="Submit" id="csv-submitter">Filter</button>
+            <button class="btn" value="Stop" id="stop-filtering">Stop</button>
+            <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+            <p id="slider-value"></p>
+
+        </div>
+        <div class="box" id="real-time-filter-plots">
+            <div class="half-plot-container" id="all-pass-response-container">
+                <h4 class="title" id="original-signal-title">Original Signal</h4>
+                <div class=".half-plot " id="original-signal"></div>
+            </div>
+            <div id="all-pass-response-container">
+                <h4 class="title" id="filtered-signal-title">Filtered Signal</h4>
+                <div class=".half-plot" id="filtered-signal"></div>
+            </div>
+        </div>
+    </section>
+    <script src="index.js"></script>
+    <script src="unitcricle.js"></script>
+    <script src="realtimeplotting.js"></script>
+</body>
+
+</html>
