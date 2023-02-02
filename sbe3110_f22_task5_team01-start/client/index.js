@@ -99,94 +99,84 @@ function arrayRemove(arr, value) {
     })
 }
 function changeImage(image) {
-    let table = document.getElementById("myTable");
-   
-    // Create a row using the inserRow() method and
-    // specify the index where you want to add the row
-    let row = table.insertRow(-1); // We are adding at the end
- 
+
+   var table = document.getElementById("myTable");  
+   var rowCount = table.rows.length;  
+   var row = table.insertRow(rowCount);  
+    //Column 1 
+    var updatedrowCount= rowCount
+    var ce1 = row.insertCell(0);  
+    var element1 = document.createElement("input");  
+    element1.type = "button";  
+    var btnName = "button" + (rowCount + 1);  
+    element1.name = btnName;  
+    element1.setAttribute('value', 'Delete'); // or element1.value = "button";  
+    element1.onclick = function () { updatedrowCount=removeRow(btnName,rowCount); }  
+    rowCount = updatedrowCount
+    ce1.appendChild(element1);  
+    //Column 2    
+    var ce2 = row.insertCell(1);  
+    ce2.innerHTML = rowCount ;  
     // Create table cells
-    let c1 = row.insertCell(0);
-    let c2 = row.insertCell(1);
-    let c3 = row.insertCell(2);
-
- 
-    // Add data to c1 and c2
-    c1.innerText = "All Pass Filter"
+    var c3 = row.insertCell(2);
   
-
     if (image == 1){
         allPassCoeff.push(0)
-        c2.innerText = 0
+        c3.innerText = 0
 
-        td.append(button);
-        trArray.append(td);
- 
-       
     } else if(image == 2){
         allPassCoeff.push(0.9)
-        c2.innerText = 0.9
+        c3.innerText = 0.9
 
     }else if(image == 3){
         allPassCoeff.push(0.5)
-        c2.innerText = 0.5
+        c3.innerText = 0.5
 
     }else if(image == 4){
         allPassCoeff.push(0.3)
-        c2.innerText = 0.3
+        c3.innerText = 0.3
 
     }else if(image == 5){
     allPassCoeff.push(-0.9)
-    c2.innerText = -0.9
+    c3.innerText = -0.9
 
     }else{
         allPassCoeff.push(-0.4)
-        c2.innerText = -0.4
+        c3.innerText = -0.4
     }
-// let tr = document.querySelectorAll("table tbody tr");
 
+    console.log(row.cells[0].childNodes[2])
 
 
 }
-// Array.from(tr).forEach(function(trArray) {
-//     let button = document.createElement("button");
-//     let td = document.createElement("td");
-//     button.innerText = "Delete";
-//     button.className = "btn_buy";
 
-// });
-// function myDeleteFunction(value) {
-//     if (value == 1){
-//         allPassCoeff.remove(0)
-
- 
-       
-//     } else if(value == 2){
-//         allPassCoeff.remove(0.9)
-
-
-//     }else if(value == 3){
-//         allPassCoeff.remove(0.5)
-
-
-//     }else if(value == 4){
-//         allPassCoeff.remove(0.3)
-
-
-//     }else if(value == 5){
-//     allPassCoeff.remove(-0.9)
-
-
-//     }else{
-//         allPassCoeff.remove(-0.4)
-
-//     }
-//     document.getElementById("myTable").deleteRow(-1);
-//   }
+function removeRow(btnName,rowCount) {  
+    // try {  
+        var table = document.getElementById("myTable");  
+        var rowCount = table.rows.length;  
+        for (var i = 0; i < rowCount; i++) {  
+            var row = table.rows[i];  
+            var rowObj = row.cells[0].childNodes[0]; 
+            var element = row.cells[1]
+            if (rowObj.name == btnName) { 
+                allPassCoeff.splice(row.cells[0], 1)  
+                // allPassCoeff = allPassCoeff.filter(element);
+                // console.log(element);
+                table.deleteRow(i);  
+                // table.find(row:eq(i), td:eq(2));
+                rowCount--;  
+                // console.log(row.cells[0].childNodes[2])
+                // allPassCoeff.remove((row.cells[0]))
+            }  
+        }  
+    // }catch (e) {  
+    //     alert(e);  
+    // } 
+    return  rowCount;
+} 
 
 function updateAllPassCoeff() {
      updateFilterPhase(allPassCoeff)
-    console.log(allPassCoeff);
     allPassCoeff
 }
 
