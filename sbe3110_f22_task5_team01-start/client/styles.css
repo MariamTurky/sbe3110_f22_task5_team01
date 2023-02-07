@@ -263,3 +263,25 @@ html{
     padding: 5px;
     justify-content:space-evenly;
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
+#context-menu{
+    position: fixed;
+    z-index: 10000;
+    width: 170px;
+    background: #1b1a1a;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+.item{
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.item:hover{
+    background: #343434;
+}
+/* ---------------------------------------------------------------------------------------------------------------- */
