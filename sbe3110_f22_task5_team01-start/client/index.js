@@ -150,35 +150,36 @@ function changeImage(image) {
 
 }
 
-function removeRow(btnName,rowCount) {  
-    // try {  
+function removeRow(btnName,rowCount) {
         var table = document.getElementById("myTable");  
         var rowCount = table.rows.length;  
-        for (var i = 0; i < rowCount; i++) {  
-            var row = table.rows[i];  
-            var rowObj = row.cells[0].childNodes[0]; 
-            var element = row.cells[1]
-            if (rowObj.name == btnName) { 
-                allPassCoeff.splice(row.cells[0], 1)  
-                // allPassCoeff = allPassCoeff.filter(element);
-                // console.log(element);
-                table.deleteRow(i);  
-                // table.find(row:eq(i), td:eq(2));
-                rowCount--;  
-                // console.log(row.cells[0].childNodes[2])
-                // allPassCoeff.remove((row.cells[0]))
+        var row = table.rows[1];  
+        var rowObj = row.cells[0].childNodes[0]; 
+        if (btnName == "button1"){
+            var rowCount = table.rows.length;  
+            for (var i = rowCount - 1; i > 0; i--) {
+                table.deleteRow(i);
+                allPassCoeff.splice(0,allPassCoeff.length);
+            }
+     
+        }
+        else{
+            for (var i = 0; i < rowCount; i++) {  
+                var row = table.rows[i];  
+                var rowObj = row.cells[0].childNodes[0]; 
+                var element = row.cells[1]
+
+                if (rowObj.name == btnName) { 
+                    allPassCoeff.splice(row.cells[0], 1)  
+                    table.deleteRow(i); 
+                    rowCount--;  
+
+                }  
             }  
-        }  
-    // }catch (e) {  
-    //     alert(e);  
-    // } 
+
+    } 
     return  rowCount;
 } 
-
-function updateAllPassCoeff() {
-     updateFilterPhase(allPassCoeff)
-    allPassCoeff
-}
 
 
 
