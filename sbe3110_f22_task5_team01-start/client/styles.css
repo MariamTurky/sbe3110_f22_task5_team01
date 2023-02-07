@@ -1,5 +1,5 @@
 html{
-    background-color: #212529;
+    background-color:#EEE9DA;
     font-family: "Open Sans";
     overflow-x: hidden;
 }
@@ -16,7 +16,7 @@ html{
 }
 .btn-cricle-control, .dropdown-check-list, .anchor{
     background-color: #212529;
-    color: #ededee;
+    color:  #6096B4;
     font-size: small;
     font-weight: 600;
     border: #212529;
@@ -49,7 +49,7 @@ html{
 .dropdown-check-list.visible .anchor {
     font-weight: bold;
     font-size: 12px;
-    color: #febc2c;
+    color:  #6096B4;
 }
 
 .dropdown-check-list.visible .items {
@@ -75,10 +75,63 @@ html{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #2a2e32;
+    background-color: #93BFCF;
+    border-radius: 8px;
+    padding: 10px;
+    height: 25%;
+}
+.box2{
+    /* background-color: #6096B4; */
     border-radius: 8px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 10%;
+
 }
+.response-plotting{
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+}
+.all-pass-response-container{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50%;   
+}
+.final-filter-response{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50%; 
+}
+/* .box3{
+    background-color: #bacec1;
+} */
+/* .myTable{
+    background-color: #93BFCF;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+
+  } */
+  
+.images{
+    background-color: #6096B4;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 8px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+/* .images{
+    margin-top: 10px;
+    background-color: #1d3124;
+    border-radius: 8px;
+} */
 
 #filter-response, #all-pass-response, #real-time-filter-plots, #real-time-filter-plots{
     min-width: 60%;
@@ -87,9 +140,7 @@ html{
     gap: 10px;
 }
 
-#final-filter-response{
-    min-width: 50%;
-}
+
 
 #all-pass-response, #real-time-filter-plots{
     flex-direction: row;
@@ -112,23 +163,23 @@ html{
 }
 
 .btn-cricle-control:hover{
-    color: #febc2c;
+    color: #6096B4;
     cursor: pointer;
 }
 
 #circle-title, #all-pass-title{
     text-align: center;
-    color: #ededee;
+    color:  #6096B4;
 }
 
 .freq-response-title, .title{
     margin: 0;
-    color: #ededee;
+    color:  #6096B4;
 }
 
 .btn{
     background-color: #212529;
-    color: #ededee;
+    color:  #6096B4;
     font-size: small;
     border: #212529;
     border-radius: 4px;
@@ -146,14 +197,14 @@ html{
 }
 
 .btn:hover{
-    color: #febc2c;
+    color: #6096B4;
     cursor: pointer;
 }
 
 #new-value{
     max-width: 100px;
     background-color: #212529;
-    color: #ededee;
+    color:  #6096B4;
     font-size: small;
     border: #212529;
     padding: 10px;
@@ -161,17 +212,26 @@ html{
 }
 
 #all-pass-response-container , .half-plot-container{
-    min-width: 48%;
+    min-width: 46%;
     max-height: 48%;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+#final-filter-response{
+    min-width: 46%;
+    margin-left: -5px;
+    margin-right: -5px;
 }
 
 #all-pass-response-title, #final-filter-response-title{
     text-align: center;
     margin-bottom: 10px;
+    font-size: large;
 }
 
 #real-time-filter-plots h4{
     text-align: center;
+    font-size: large;
     margin-bottom: 5px;
 }
 
@@ -186,11 +246,11 @@ html{
 }
 
 #zero{
-    color: #febc2c;
+    color: #6096B4;
 }
 
 .navigation-bar{
-    background-color: #111519;
+    background-color:  #6096B4;
     color: white;
     position: fixed;
     display: flex;
