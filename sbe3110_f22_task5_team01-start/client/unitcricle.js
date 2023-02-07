@@ -13,7 +13,46 @@ const modesMap = {
     'zero': Mode.ZERO,
     'pole': Mode.POLE,
 }
-
+//----------------------------------------------------------------------------------------------------------------
+let events = ["contextmenu", "touchstart","onclick"];
+var timeout;
+var lastTap = 0;
+let contextMenu = document.getElementById("context-menu");
+events.forEach((eventType) => {
+  document.addEventListener(
+    eventType,
+    (e) => {
+      e.preventDefault();
+      let mouseX = e.clientX || e.touches[0].clientX;
+      let mouseY = e.clientY || e.touches[0].clientY;
+      let menuHeight = contextMenu.getBoundingClientRect().height;
+      let menuWidth = contextMenu.getBoundingClientRect().width;
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      if (width - mouseX <= 250) {
+        contextMenu.style.borderRadius = "5px 0 5px 5px";
+        contextMenu.style.left = width - menuWidth + "px";
+        contextMenu.style.top = mouseY + "px";
+        if (height - mouseY <= 250) {
+          contextMenu.style.top = mouseY - menuHeight + "px";
+          contextMenu.style.borderRadius = "5px 5px 0 5px";
+        }
+      }
+      else {
+        contextMenu.style.borderRadius = "0 5px 5px 5px";
+        contextMenu.style.left = mouseX + "px";
+        contextMenu.style.top = mouseY + "px";
+        if (height - mouseY <= 250) {
+          contextMenu.style.top = mouseY - menuHeight + "px";
+          contextMenu.style.borderRadius = "5px 5px 5px 0";
+        }
+      }
+      contextMenu.style.visibility = "visible";
+    },
+    { passive: false}
+  );
+});
+//---------------------------------------------------------------------------------------------------------------
 const s = (p5_inst) => {
     p5_inst.setup = function () {
         p5.disableFriendlyErrors = true;
@@ -350,23 +389,47 @@ const s = (p5_inst) => {
 }
 
 document.querySelectorAll('.mode-control').forEach(item => {
+
     item.addEventListener('click', changeMode)
 })
+//---------------------------------------------------------------------------------------------------------------
+document.addEventListener("touchend", function (e) {
+    var currentTime = new Date().getTime();
+    var tapLength = currentTime - lastTap;
+    clearTimeout(timeout);
+      
+    if (tapLength < 500 && tapLength > 0) {
+      contextMenu.style.visibility = "hidden";
+      e.preventDefault();
+    } else {
+      timeout = setTimeout(function () {
+        clearTimeout(timeout);
+      }, 500);
+    }
+    lastTap = currentTime;
+  });
 
 document
-    .querySelector('#remove-all')
-    .addEventListener('click', () => filter_plane.removeAll())
+  .querySelector('#remove')
+  .addEventListener('click', () => filter_plane.remove(curr_picked.index))
+document
+  .querySelector('#remove-all')
+  .addEventListener('click', () => filter_plane.removeAll())
 
 document
-    .querySelector('#remove-zeros')
-    .addEventListener('click', () => filter_plane.removeZeros())
+  .querySelector('#remove-zeros')
+  .addEventListener('click', () => filter_plane.removeZeros())
 
 document
-    .querySelector('#remove-poles')
-    .addEventListener('click', () => filter_plane.removePoles())
+  .querySelector('#remove-poles')
+  .addEventListener('click', () => filter_plane.removePoles())
+  
+document.addEventListener("click",function (e)  {
+        if (!contextMenu.contains(e.target)) {
+            contextMenu.style.visibility = "hidden";
+// document.removeEventListener('click', documentClickHandler);
+   }
 
-document
-    .querySelector('#remove')
-    .addEventListener('click', () => filter_plane.remove(curr_picked.index))
-
+  });
+//---------------------------------------------------------------------------------------------------------------------
 let filterCanvas = new p5(s, 'circle-canvas')
