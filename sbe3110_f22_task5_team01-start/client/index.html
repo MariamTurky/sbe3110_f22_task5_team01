@@ -36,6 +36,7 @@
 </head>
 
 <body>
+<!------------------------------------------------------------------------------------------------------------------  -->
 	<section id="filter-design" style="display: none;">
 		<div class="box" id="design-unit-circle">
 			<h2 id="circle-title"  style = "color: #16242c; font-size: larger ;">Digital Filter Design</h2>
@@ -43,11 +44,14 @@
 			<div id="circle-control">
 				<button id="zero" class="btn-cricle-control mode-control">Add Zeros</button>
 				<button id="pole" class="btn-cricle-control mode-control">Add Poles</button>
-				<button id="remove" class="btn-cricle-control">Remove</button>
-				<button id="remove-zeros" class="btn-cricle-control">Remove Zeros</button>
-				<button id="remove-poles" class="btn-cricle-control">Remove Poles</button>
-				<button id="remove-all" class="btn-cricle-control">Remove All</button>
 			</div>
+			<div id="context-menu">
+				<div class="item"id='remove'>Remove</div>
+				<div class="item" id='remove-poles'>RemovePoles</div>
+				<div class="item" id='remove-all'>RemoveAll</div>
+				<div class="item" id='remove-zeros'>RemoveZeros</div>
+			</div>
+<!-------------------------------------------------------------------------------------------------------------------- -->
 		</div>
 		<div class="box" id="filter-response">
 			<h4 class="freq-response-title title"  style = "color: #16242c;">Magnitude Response</h4>
