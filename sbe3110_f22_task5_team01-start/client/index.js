@@ -115,10 +115,10 @@ function changeImage(image) {
     rowCount = updatedrowCount
     ce1.appendChild(element1);  
     //Column 2    
-    var ce2 = row.insertCell(1);  
-    ce2.innerHTML = rowCount ;  
+    // var ce2 = row.insertCell(1);  
+    // ce2.innerHTML = rowCount ;  
     // Create table cells
-    var c3 = row.insertCell(2);
+    var c3 = row.insertCell(1);
   
     if (image == 1){
         allPassCoeff.push(0)
@@ -150,7 +150,9 @@ function changeImage(image) {
 
 }
 
-function removeRow(btnName,rowCount) {
+function removeRow(btnName,rowCount) {  
+    // try {  
+     
         var table = document.getElementById("myTable");  
         var rowCount = table.rows.length;  
         var row = table.rows[1];  
@@ -171,7 +173,9 @@ function removeRow(btnName,rowCount) {
 
                 if (rowObj.name == btnName) { 
                     allPassCoeff.splice(row.cells[0], 1)  
-                    table.deleteRow(i); 
+
+                    table.deleteRow(i);  
+
                     rowCount--;  
 
                 }  
@@ -180,6 +184,88 @@ function removeRow(btnName,rowCount) {
     } 
     return  rowCount;
 } 
+// function changeImage(image) {
+
+//    var table = document.getElementById("myTable");  
+//    var rowCount = table.rows.length;  
+//    var row = table.insertRow(rowCount);  
+//     //Column 1 
+//     var updatedrowCount= rowCount
+//     var ce1 = row.insertCell(0);  
+//     var element1 = document.createElement("input");  
+//     element1.type = "button";  
+//     var btnName = "button" + (rowCount + 1);  
+//     element1.name = btnName;  
+//     element1.setAttribute('value', 'Delete'); // or element1.value = "button";  
+//     element1.onclick = function () { updatedrowCount=removeRow(btnName,rowCount); }  
+//     rowCount = updatedrowCount
+//     ce1.appendChild(element1);  
+//     //Column 2    
+//     var ce2 = row.insertCell(1);  
+//     ce2.innerHTML = rowCount ;  
+//     // Create table cells
+//     var c3 = row.insertCell(2);
+  
+//     if (image == 1){
+//         allPassCoeff.push(0)
+//         c3.innerText = 0
+
+//     } else if(image == 2){
+//         allPassCoeff.push(0.9)
+//         c3.innerText = 0.9
+
+//     }else if(image == 3){
+//         allPassCoeff.push(0.5)
+//         c3.innerText = 0.5
+
+//     }else if(image == 4){
+//         allPassCoeff.push(0.3)
+//         c3.innerText = 0.3
+
+//     }else if(image == 5){
+//     allPassCoeff.push(-0.9)
+//     c3.innerText = -0.9
+
+//     }else{
+//         allPassCoeff.push(-0.4)
+//         c3.innerText = -0.4
+//     }
+
+//     console.log(row.cells[0].childNodes[2])
+
+
+// }
+
+// function removeRow(btnName,rowCount) {
+//         var table = document.getElementById("myTable");  
+//         var rowCount = table.rows.length;  
+//         var row = table.rows[1];  
+//         var rowObj = row.cells[0].childNodes[0]; 
+//         if (btnName == "button1"){
+//             var rowCount = table.rows.length;  
+//             for (var i = rowCount - 1; i > 0; i--) {
+//                 table.deleteRow(i);
+//                 allPassCoeff.splice(0,allPassCoeff.length);
+//             }
+     
+//         }
+//         else{
+//             for (var i = 0; i < rowCount; i++) {  
+//                 var row = table.rows[i];  
+//                 var rowObj = row.cells[0].childNodes[0]; 
+//                 var element = row.cells[1]
+
+//                 if (rowObj.name == btnName) { 
+//                     allPassCoeff.splice(row.cells[0], 1)  
+//                     table.deleteRow(i); 
+//                     rowCount--;  
+
+//                 }  
+//             }  
+
+//     } 
+//     return  rowCount;
+// } 
 
 
 
