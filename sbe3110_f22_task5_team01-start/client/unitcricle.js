@@ -411,25 +411,42 @@ document.addEventListener("touchend", function (e) {
 
 document
   .querySelector('#remove')
-  .addEventListener('click', () => filter_plane.remove(curr_picked.index))
-document
-  .querySelector('#remove-all')
-  .addEventListener('click', () => filter_plane.removeAll())
+  .addEventListener('click', function(e){
+    filter_plane.remove(curr_picked.index);
+    if (contextMenu.contains(e.target)) {
+        contextMenu.style.visibility = "hidden";
+}})
+ 
 
 document
+  .querySelector('#remove-all')
+  .addEventListener('click', function(e){
+    filter_plane.removeAll();
+    if (contextMenu.contains(e.target)) {
+        contextMenu.style.visibility = "hidden";
+}})
+  
+document
   .querySelector('#remove-zeros')
-  .addEventListener('click', () => filter_plane.removeZeros())
+  .addEventListener('click', function(e) {
+    filter_plane.removeZeros();
+    if (contextMenu.contains(e.target)) {
+        contextMenu.style.visibility = "hidden";
+}})
 
 document
   .querySelector('#remove-poles')
-  .addEventListener('click', () => filter_plane.removePoles())
+  .addEventListener('click', function(e){
+    filter_plane.removePoles();
+    if (contextMenu.contains(e.target)) {
+        contextMenu.style.visibility = "hidden";
+}})
   
 document.addEventListener("click",function (e)  {
-        if (!contextMenu.contains(e.target)) {
-            contextMenu.style.visibility = "hidden";
-// document.removeEventListener('click', documentClickHandler);
-   }
+    if (!contextMenu.contains(e.target)) {
+        contextMenu.style.visibility = "hidden";
+    }})
 
-  });
-//---------------------------------------------------------------------------------------------------------------------
 let filterCanvas = new p5(s, 'circle-canvas')
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
