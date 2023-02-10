@@ -263,6 +263,10 @@ html{
     padding: 5px;
     justify-content:space-evenly;
 }
+
+.nav-arrow:hover{
+    cursor: pointer;
+}
 /* ------------------------------------------------------------------------------------------------------------------- */
 #context-menu{
     position: fixed;
