@@ -12,12 +12,20 @@ let allPassCoeff = []
 document.querySelector('#listOfA').addEventListener(updateAllPassCoeff)
 document.querySelector('#new-all-pass-coef').addEventListener('click', addNewA)
 
+
+let current_page = 0;
+
 const left_nav_arrow = document.getElementById("left-nav-arrow");
 const right_nav_arrow = document.getElementById("right-nav-arrow");
+
+const design_filter_page = document.getElementById("filter-design-page");
+const all_pass_filter_page = document.getElementById("all-pass-page");
+const real_time_filter_page = document.getElementById("real-time-filter");
 
 left_nav_arrow.addEventListener("click", () => {
     navigate(true);
 })
+
 right_nav_arrow.addEventListener("click", () => {
     navigate(false);
 })

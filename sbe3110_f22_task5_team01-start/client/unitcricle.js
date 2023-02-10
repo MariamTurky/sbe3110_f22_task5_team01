@@ -5,52 +5,52 @@ let unit_circle_mode
 let last_press_position
 
 const CANVAS_SIZE = 300
-const NONE_PICKED = { item: {point: null, conjugate: null}, index: -1 }
-const Mode = { ZERO : 0, POLE : 1, CONJ_ZERO : 2, CONJ_POLE : 3 }
-const Conj_Modes = {2: Mode.CONJ_ZERO, 3: Mode.CONJ_POLE}
+const NONE_PICKED = { item: { point: null, conjugate: null }, index: -1 }
+const Mode = { ZERO: 0, POLE: 1, CONJ_ZERO: 2, CONJ_POLE: 3 }
+const Conj_Modes = { 2: Mode.CONJ_ZERO, 3: Mode.CONJ_POLE }
 const API = "http://127.0.0.1:8080"
 const modesMap = {
     'zero': Mode.ZERO,
     'pole': Mode.POLE,
 }
 //----------------------------------------------------------------------------------------------------------------
-let events = ["contextmenu", "touchstart","onclick"];
+let events = ["contextmenu", "touchstart", "onclick"];
 var timeout;
 var lastTap = 0;
 let contextMenu = document.getElementById("context-menu");
 events.forEach((eventType) => {
-  document.addEventListener(
-    eventType,
-    (e) => {
-      e.preventDefault();
-      let mouseX = e.clientX || e.touches[0].clientX;
-      let mouseY = e.clientY || e.touches[0].clientY;
-      let menuHeight = contextMenu.getBoundingClientRect().height;
-      let menuWidth = contextMenu.getBoundingClientRect().width;
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-      if (width - mouseX <= 250) {
-        contextMenu.style.borderRadius = "5px 0 5px 5px";
-        contextMenu.style.left = width - menuWidth + "px";
-        contextMenu.style.top = mouseY + "px";
-        if (height - mouseY <= 250) {
-          contextMenu.style.top = mouseY - menuHeight + "px";
-          contextMenu.style.borderRadius = "5px 5px 0 5px";
-        }
-      }
-      else {
-        contextMenu.style.borderRadius = "0 5px 5px 5px";
-        contextMenu.style.left = mouseX + "px";
-        contextMenu.style.top = mouseY + "px";
-        if (height - mouseY <= 250) {
-          contextMenu.style.top = mouseY - menuHeight + "px";
-          contextMenu.style.borderRadius = "5px 5px 5px 0";
-        }
-      }
-      contextMenu.style.visibility = "visible";
-    },
-    { passive: false}
-  );
+    document.addEventListener(
+        eventType,
+        (e) => {
+            e.preventDefault();
+            let mouseX = e.clientX || e.touches[0].clientX;
+            let mouseY = e.clientY || e.touches[0].clientY;
+            let menuHeight = contextMenu.getBoundingClientRect().height;
+            let menuWidth = contextMenu.getBoundingClientRect().width;
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            if (width - mouseX <= 250) {
+                contextMenu.style.borderRadius = "5px 0 5px 5px";
+                contextMenu.style.left = width - menuWidth + "px";
+                contextMenu.style.top = mouseY + "px";
+                if (height - mouseY <= 250) {
+                    contextMenu.style.top = mouseY - menuHeight + "px";
+                    contextMenu.style.borderRadius = "5px 5px 0 5px";
+                }
+            }
+            else {
+                contextMenu.style.borderRadius = "0 5px 5px 5px";
+                contextMenu.style.left = mouseX + "px";
+                contextMenu.style.top = mouseY + "px";
+                if (height - mouseY <= 250) {
+                    contextMenu.style.top = mouseY - menuHeight + "px";
+                    contextMenu.style.borderRadius = "5px 5px 5px 0";
+                }
+            }
+            contextMenu.style.visibility = "visible";
+        },
+        { passive: false }
+    );
 });
 //---------------------------------------------------------------------------------------------------------------
 const s = (p5_inst) => {
@@ -104,7 +104,7 @@ const s = (p5_inst) => {
             if (found.item.point) {
                 curr_picked = found
             }
-            else if(!position_changed) filter_plane.addItem(p, mode = unit_circle_mode)
+            else if (!position_changed) filter_plane.addItem(p, mode = unit_circle_mode)
             drawCursor()
             p5_inst.redraw()
         }
@@ -113,11 +113,11 @@ const s = (p5_inst) => {
     p5_inst.mouseDragged = function () {
         let p = p5_inst.createVector(p5_inst.mouseX, p5_inst.mouseY)
         if (curr_picked != NONE_PICKED && isInsideCircle(p, unit_circle_center, radius, 0)) {
-            if(!curr_picked.item.conjugate){
+            if (!curr_picked.item.conjugate) {
                 p.y = unit_circle_center.y
                 curr_picked.item.point.center = p
             }
-            else{
+            else {
                 curr_picked.item.point.center = p
                 curr_picked.item.conjugate.center = curr_picked.item.point.getConjugate().center
             }
@@ -160,10 +160,10 @@ const s = (p5_inst) => {
         p5_inst.stroke(255)
         p5_inst.fill('#ccc')
         p5_inst.circle(unit_circle_center.x, unit_circle_center.y, radius * 2)
-        for(let i = 1; i <= 3; i++){
+        for (let i = 1; i <= 3; i++) {
             p5_inst.stroke("#5b5a5a")
             p5_inst.noFill()
-            p5_inst.circle(unit_circle_center.x, unit_circle_center.y, radius * 2*i/3)
+            p5_inst.circle(unit_circle_center.x, unit_circle_center.y, radius * 2 * i / 3)
         }
         const axes = [
             p5_inst.createVector(radius, 0),
@@ -174,8 +174,8 @@ const s = (p5_inst) => {
         axes.forEach((axis) => { arrow(unit_circle_center, axis, '#000') })
     }
 
-    function isInsideCircle(p, center, radius, error=0) {
-        if(!p || !center || !radius) return
+    function isInsideCircle(p, center, radius, error = 0) {
+        if (!p || !center || !radius) return
         return p.dist(center) < radius + (radius * error) / 100
     }
 
@@ -226,7 +226,7 @@ const s = (p5_inst) => {
             return (this.center.y - this.origin.y) / y_max
         }
 
-        getRelativePosition(max){
+        getRelativePosition(max) {
             return [this.getRelativeX(max), this.getRelativeY(max)]
         }
 
@@ -352,7 +352,7 @@ const s = (p5_inst) => {
         }
 
         #addZero(p) {
-            if (Math.abs(unit_circle_center.y - p.y) > 5){
+            if (Math.abs(unit_circle_center.y - p.y) > 5) {
                 this.#addConjugateZero(p)
                 return
             }
@@ -362,7 +362,7 @@ const s = (p5_inst) => {
         }
 
         #addPole(p) {
-            if (Math.abs(unit_circle_center.y - p.y) > 5){
+            if (Math.abs(unit_circle_center.y - p.y) > 5) {
                 this.#addConjugatePole(p)
                 return
             }
@@ -397,55 +397,60 @@ document.addEventListener("touchend", function (e) {
     var currentTime = new Date().getTime();
     var tapLength = currentTime - lastTap;
     clearTimeout(timeout);
-      
+
     if (tapLength < 500 && tapLength > 0) {
-      contextMenu.style.visibility = "hidden";
-      e.preventDefault();
+        contextMenu.style.visibility = "hidden";
+        e.preventDefault();
     } else {
-      timeout = setTimeout(function () {
-        clearTimeout(timeout);
-      }, 500);
+        timeout = setTimeout(function () {
+            clearTimeout(timeout);
+        }, 500);
     }
     lastTap = currentTime;
-  });
+});
 
 document
-  .querySelector('#remove')
-  .addEventListener('click', function(e){
-    filter_plane.remove(curr_picked.index);
-    if (contextMenu.contains(e.target)) {
-        contextMenu.style.visibility = "hidden";
-}})
- 
+    .querySelector('#remove')
+    .addEventListener('click', function (e) {
+        filter_plane.remove(curr_picked.index);
+        if (contextMenu.contains(e.target)) {
+            contextMenu.style.visibility = "hidden";
+        }
+    })
+
 
 document
-  .querySelector('#remove-all')
-  .addEventListener('click', function(e){
-    filter_plane.removeAll();
-    if (contextMenu.contains(e.target)) {
-        contextMenu.style.visibility = "hidden";
-}})
-  
-document
-  .querySelector('#remove-zeros')
-  .addEventListener('click', function(e) {
-    filter_plane.removeZeros();
-    if (contextMenu.contains(e.target)) {
-        contextMenu.style.visibility = "hidden";
-}})
+    .querySelector('#remove-all')
+    .addEventListener('click', function (e) {
+        filter_plane.removeAll();
+        if (contextMenu.contains(e.target)) {
+            contextMenu.style.visibility = "hidden";
+        }
+    })
 
 document
-  .querySelector('#remove-poles')
-  .addEventListener('click', function(e){
-    filter_plane.removePoles();
-    if (contextMenu.contains(e.target)) {
-        contextMenu.style.visibility = "hidden";
-}})
-  
-document.addEventListener("click",function (e)  {
+    .querySelector('#remove-zeros')
+    .addEventListener('click', function (e) {
+        filter_plane.removeZeros();
+        if (contextMenu.contains(e.target)) {
+            contextMenu.style.visibility = "hidden";
+        }
+    })
+
+document
+    .querySelector('#remove-poles')
+    .addEventListener('click', function (e) {
+        filter_plane.removePoles();
+        if (contextMenu.contains(e.target)) {
+            contextMenu.style.visibility = "hidden";
+        }
+    })
+
+document.addEventListener("click", function (e) {
     if (!contextMenu.contains(e.target)) {
         contextMenu.style.visibility = "hidden";
-    }})
+    }
+})
 
 let filterCanvas = new p5(s, 'circle-canvas')
 
