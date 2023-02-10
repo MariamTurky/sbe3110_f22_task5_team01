@@ -8,10 +8,28 @@ const zero_mode_btn = document.getElementById("zero")
 const pole_mode_btn = document.getElementById("pole")
 const modes_btns = [zero_mode_btn, pole_mode_btn]
 
-
 let allPassCoeff = []
 document.querySelector('#listOfA').addEventListener(updateAllPassCoeff)
 document.querySelector('#new-all-pass-coef').addEventListener('click', addNewA)
+
+const left_nav_arrow = document.getElementById("left-nav-arrow");
+const right_nav_arrow = document.getElementById("right-nav-arrow");
+
+left_nav_arrow.addEventListener("click", () => {
+    navigate(true);
+})
+right_nav_arrow.addEventListener("click", () => {
+    navigate(false);
+})
+
+function navigate(isLeft) {
+    isLeft ?
+        current_page == 0 ? current_page = 2 : current_page-- :
+        current_page == 2 ? current_page = 0 : current_page++;
+    design_filter_page.style.display = current_page == 0 ? "flex" : "none";
+    all_pass_filter_page.style.display = current_page == 1 ? "flex" : "none";
+    real_time_filter_page.style.display = current_page == 2 ? "flex" : "none";
+}
 
 async function postData(url = '', data = {}) {
     const response = await fetch(url, {
