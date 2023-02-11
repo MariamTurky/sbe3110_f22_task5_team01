@@ -5,7 +5,7 @@ let unit_circle_mode
 let last_press_position
 
 const CANVAS_SIZE = 300
-const NONE_PICKED = { item: { point: null, conjugate: null }, index: -1 }
+const NONE_PICKED = { item: { point: null }, index: -1 }
 const Mode = { ZERO: 0, POLE: 1, CONJ_ZERO: 2, CONJ_POLE: 3 }
 const Conj_Modes = { 2: Mode.CONJ_ZERO, 3: Mode.CONJ_POLE }
 const API = "http://127.0.0.1:8080"
@@ -13,9 +13,8 @@ const modesMap = {
     'zero': Mode.ZERO,
     'pole': Mode.POLE,
 }
-
 //----------------------------------------------------------------------------------------------------------------
-let events = ["contextmenu", "touchstart", "onclick"];
+let events = ["contextmenu", "touchstart"];
 var timeout;
 var lastTap = 0;
 let contextMenu = document.getElementById("context-menu");
@@ -53,7 +52,6 @@ events.forEach((eventType) => {
         { passive: false }
     );
 });
-
 //---------------------------------------------------------------------------------------------------------------
 const s = (p5_inst) => {
     p5_inst.setup = function () {
@@ -115,13 +113,9 @@ const s = (p5_inst) => {
     p5_inst.mouseDragged = function () {
         let p = p5_inst.createVector(p5_inst.mouseX, p5_inst.mouseY)
         if (curr_picked != NONE_PICKED && isInsideCircle(p, unit_circle_center, radius, 0)) {
-            if (!curr_picked.item.conjugate) {
-                p.y = unit_circle_center.y
+            
+            {
                 curr_picked.item.point.center = p
-            }
-            else {
-                curr_picked.item.point.center = p
-                curr_picked.item.conjugate.center = curr_picked.item.point.getConjugate().center
             }
         }
         updateFilterDesign(filter_plane.getZerosPoles(radius))
@@ -144,14 +138,12 @@ const s = (p5_inst) => {
     }
 
     function drawPoints() {
-        filter_plane.items.forEach(({ point, conjugate }) => {
+        filter_plane.items.forEach(({ point }) => {
             if (point == curr_picked.item.point) {
                 point.draw(undefined, undefined, (picked = true))
-                conjugate?.draw(undefined, undefined, (picked = true))
             }
             else {
                 point.draw()
-                conjugate?.draw()
             }
 
         })
@@ -213,7 +205,6 @@ const s = (p5_inst) => {
         p5_inst.triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0)
         p5_inst.pop()
     }
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class Point {
         constructor(center, origin) {
@@ -233,19 +224,12 @@ const s = (p5_inst) => {
             return [this.getRelativeX(max), this.getRelativeY(max)]
         }
 
-        getConjugate() {
-            let conjugate_center = p5_inst.createVector(
-                this.center.x,
-                this.origin.y - this.getRelativeY(1)
-            )
-            return new Point(conjugate_center, this.origin)
-        }
+       
 
         hash() {
             return `${this.center.x}${this.center.y}`
         }
     }
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class Zero extends Point {
         constructor(center, origin) {
@@ -261,12 +245,8 @@ const s = (p5_inst) => {
             p5_inst.pop()
         }
 
-        getConjugate() {
-            let p = super.getConjugate()
-            return new Zero(p.center, p.origin)
-        }
+        
     }
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class Pole extends Point {
         constructor(center, origin) {
@@ -279,19 +259,14 @@ const s = (p5_inst) => {
                 : cross(this.center, size, fill, 2, fill)
         }
 
-        getConjugate() {
-            let p = super.getConjugate()
-            return new Pole(p.center, p.origin)
-        }
     }
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class FilterPlane {
         constructor() {
             this.items = []
         }
 
-        //TODO: fix release bug
+       
         therePoint(p, error = 5) {
             for (let i = 0; i < this.items.length; i++) {
                 let item = this.items[i]
@@ -299,13 +274,12 @@ const s = (p5_inst) => {
                     return { item, index: i }
                 }
             }
-            return { item: { point: null, conjugate: null }, index: -1 }
+            return { item: { point: null}, index: -1 }
         }
 
         #isInsideItem(p, item, error) {
             let insidePonit = isInsideCircle(p, item.point.center, 8, error)
-            let insideConjugate = isInsideCircle(p, item.conjugate?.center, 8, error)
-            return insidePonit || insideConjugate
+            return insidePonit 
         }
 
         isInsidePlane(p) {
@@ -315,13 +289,11 @@ const s = (p5_inst) => {
         getZerosPoles(max) {
             let zerosPositions = [],
                 polesPositions = []
-            this.items.forEach(({ point, conjugate }) => {
+            this.items.forEach(({ point }) => {
                 let pointPosition = point.getRelativePosition(max)
-                let conjugatePosition = conjugate?.getRelativePosition(max)
                 let positions =
                     point instanceof Zero ? zerosPositions : polesPositions
                 positions.push(pointPosition)
-                if (conjugatePosition) positions.push(conjugatePosition)
             })
             return { zeros: zerosPositions, poles: polesPositions }
         }
@@ -359,36 +331,34 @@ const s = (p5_inst) => {
 
         #addZero(p) {
             if (Math.abs(unit_circle_center.y - p.y) > 5) {
-                this.#addConjugateZero(p)
+                this.#addthisZero(p)
                 return
             }
             let center = p5_inst.createVector(p.x, unit_circle_center.y)
             let zero = new Zero(center, unit_circle_center)
-            this.items.push({ point: zero, conjugate: null })
+            this.items.push({ point: zero })
         }
 
         #addPole(p) {
             if (Math.abs(unit_circle_center.y - p.y) > 5) {
-                this.#addConjugatePole(p)
+                this.#addthisPole(p)
                 return
             }
             let center = p5_inst.createVector(p.x, unit_circle_center.y)
             let pole = new Pole(center, unit_circle_center)
-            this.items.push({ point: pole, conjugate: null })
+            this.items.push({ point: pole })
         }
 
-        #addConjugatePole(p) {
+        #addthisPole(p) {
             let center = p5_inst.createVector(p.x, p.y)
             let pole = new Pole(center, unit_circle_center)
-            let conjugate_pole = pole.getConjugate()
-            this.items.push({ point: pole, conjugate: conjugate_pole })
+            this.items.push({ point: pole })
         }
 
-        #addConjugateZero(p) {
+        #addthisZero(p) {
             let center = p5_inst.createVector(p.x, p.y)
             let zero = new Zero(center, unit_circle_center)
-            let conjugate_zero = zero.getConjugate()
-            this.items.push({ point: zero, conjugate: conjugate_zero })
+            this.items.push({ point: zero })
         }
     }
 
@@ -460,3 +430,4 @@ document.addEventListener("click", function (e) {
 
 let filterCanvas = new p5(s, 'circle-canvas')
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
