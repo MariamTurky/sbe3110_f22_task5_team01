@@ -57,15 +57,8 @@ body{
 
 #filter-design-page, #all-pass-page, #real-time-filter{
     display: flex;
-    column-gap: 10px;
-}
- #all-pass-page, #real-time-filter{
     flex-direction: column;
-    gap: 10px;
- }
-
-#filter-mag-response, #filter-phase-response{
-    display: flex;
+    column-gap: 10px;
 }
 
 .box {
@@ -76,6 +69,7 @@ body{
     background-color: #93BFCF;
     border-radius: 8px;
     padding: 10px;
+    margin: 10px;
 }
 .box2{
     /* background-color: #6096B4; */
@@ -85,7 +79,6 @@ body{
     flex-direction: column;
     justify-content: center;
     width: 10%;
-
 }
 
 .final-filter-response{
@@ -94,17 +87,20 @@ body{
     width: 50%; 
 }
 
-.images{
+.image{
     background-color: #6096B4;
     border-radius: 8px;
     margin-top: 5px;
     margin-bottom: 5px;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     border-radius: 8px;
     margin-left: 14px;
     margin-right: 14px;
+    width: 250px;
+    height: 150px;
 }
+
 
 #all-pass-response, #real-time-filter-plots{
     flex-direction: row;
@@ -266,7 +262,7 @@ th {
 
 table {
     border-collapse: collapse;
-    width: 80px;
+    width: 200px;
     background-color: #93BFCF;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
