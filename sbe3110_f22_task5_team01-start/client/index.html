@@ -2,37 +2,15 @@
 <html>
 
 <head>
-
 	<meta charset="utf-8" />
 	<title style="color: #16242c;">Index</title>
 	<script src="lib/danfo.min.js"></script>
 	<script src="lib/p5.min.js"></script>
 	<script src="lib/plotly-2.8.3.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script src="lib/notyf.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<link rel="stylesheet" type="text/css" href="lib/notfy.min.css" />
-	<style>
-		table,
-		td,
-		th {
-			border: 3px solid #6096B4;
-		}
-
-		table {
-			border-collapse: collapse;
-			width: 80px;
-			background-color: #93BFCF;
-			font-family: Arial, Helvetica, sans-serif;
-			border-collapse: collapse;
-
-			margin-top: -10px;
-
-		}
-
-		th {
-			height: 15px;
-		}
-	</style>
 </head>
 
 <body>
@@ -51,15 +29,33 @@
 				<div class="item" id='remove-all'>RemoveAll</div>
 				<div class="item" id='remove-zeros'>RemoveZeros</div>
 			</div>
-			<!-------------------------------------------------------------------------------------------------------------------- -->
+
 		</div>
-		<div class="box" id="filter-response">
-			<h4 class="freq-response-title title" style="color: #16242c;">Magnitude Response</h4>
-			<div id="filter-mag-response" class="response-plotting"> </div>
-			<h4 class="freq-response-title title" style="color: #16242c;">Phase Response</h2>
-				<div id="filter-phase-response" class="response-plotting"> </div>
+		<div style="display: flex; flex-direction: column;">
+			<div class="box">
+				<h4 class="freq-response-title title" style="color: #16242c;">Magnitude Response</h4>
+				<div id="filter-mag-response" class="response-plotting"> </div>
+			</div>
+			<div class="box">
+				<h4 class="freq-response-title title" style="color: #16242c;">Phase Response</h4>
+				<div id="filter-phase-response" class="response-plotting"></div>
+			</div>
 		</div>
+		<div class="box" style="flex-direction: column; " id="real-time-filter-plots">
+			<div class="box" id="all-pass-response-container">
+				<h4 class="title" id="original-signal-title" style="color: #16242c;">Original Signal</h4>
+				<div class=".half-plot" id="original-signal"></div>
+			</div>
+			<div class="box" id="all-pass-response-container">
+				<h4 class="title" id="filtered-signal-title" style="color: #16242c;">Filtered Signal</h4>
+				<div class=".half-plot" id="filtered-signal"></div>
+			</div>
+		</div>
+		<!-- <div id="generate-signal-container"
+		style="width: 200px ; height:200px;background-color: black;border: 1px solid 0777777;"></div> -->
+
 	</section>
+	<!---------------------------------------------------------------------------------------------------------------------->
 
 	<section id="all-pass-page" style="display: none;">
 		<div class="box" id="all-pass-unit-circle">
@@ -99,38 +95,16 @@
 			<img class="images" id="a3" src="../doc/-0.4.png" onclick="changeImage(6)" width="220" height="80">
 		</div>
 	</section>
+	<!---------------------------------------------------------------------------------------------------------------------->
 
-	<section id="real-time-filter" style="display: none;">
-		<div class="box" id="real-time-filter-container">
-			<h2 id="real-time-title" class="title" style="color: #16242c;">Real Time Filtering</h2>
-			<input class="btn" type="file" id="csvFile" accept=".csv" />
-			<button class="btn" value="Submit" id="csv-submitter" style="color: #16242c;">Filter</button>
-			<button class="btn" value="Stop" id="stop-filtering">Stop</button>
-			<input type="range" min="1" max="100" value="1" class="slider" id="myRange">
-			<p id="slider-value"></p>
-
-		</div>
-		<div id="container" style="width: 50px ; height:30px ; border: 1px solid 0777777;"></div> -->
-		<div class="box" id="real-time-filter-plots">
-			<div class="half-plot-container" id="all-pass-response-container">
-				<h4 class="title" id="original-signal-title" style="color: #16242c;">Original Signal</h4>
-				<div class=".half-plot " id="original-signal"></div>
-			</div>
-			<div id="all-pass-response-container">
-				<h4 class="title" id="filtered-signal-title" style="color: #16242c;">Filtered Signal</h4>
-				<div class=".half-plot" id="filtered-signal"></div>
-			</div>
-		</div>
-	</section>
-
-	<div class="navigation-bar">
-		<img src="../doc/arrow.png" id="left-nav-arrow" class="nav-arrow" style="transform: scaleX(-1);">
-		<img src="../doc/arrow.png" class="nav-arrow" id="right-nav-arrow">
+	<div class="navigation-bar" id="nav-bar">
+		<button id="nav-btn">Correct Phase</button>
 	</div>
 
 	<script src="index.js"></script>
 	<script src="unitcricle.js"></script>
 	<script src="realtimeplotting.js"></script>
+
 </body>
 
 </html>

@@ -12,23 +12,23 @@ function Data() {
     return num;
 }
 
-Plotly.plot('original-signal',[{
-    y:[Data()],
-    mode:'lines',
+Plotly.plot('original-signal', [{
+    y: [],
+    mode: 'lines',
     line: { color: '#febc2c' },
-}],{
-    
+}], {
+
     plot_bgcolor: "#111111",
     paper_bgcolor: "#111111"
 });
 
 console.log(arr_y)
-Plotly.plot('filtered-signal',[{
-    y:[Data()],
-    mode:'lines',
+Plotly.plot('filtered-signal', [{
+    y: [],
+    mode: 'lines',
     line: { color: '#fd413c' }
-}],{
-    
+}], {
+
     plot_bgcolor: "#111111",
     paper_bgcolor: "#111111"
 });
@@ -93,51 +93,41 @@ function filter(a, b, n, x, y) {
     return y_n
 }
 
-document.getElementById("container").addEventListener("mousemove", async function (e) {
-
-
+document.getElementById("generate-signal-container").addEventListener("mousemove", async function (e) {
     
-   
-
     const { zeros, poles } = filter_plane.getZerosPoles(radius)
     if (zeros.length === 0 && poles.length === 0) {
         notyf.error('No filter designed');
         return
     }
     const [a, b] = await get_differenceEquationCoefficients(zeros, poles)
-   
 
-
-    Plotly.extendTraces('original-signal',{ y:[[Data()]]}, [0]);
+    Plotly.extendTraces('original-signal', { y: [[Data()]] }, [0]);
 
     var y_filtterd = arr_y;
     y_filtterd[cntt] = filter(a, b, cntt, arr_y, y_filtterd);
-    Plotly.extendTraces('filtered-signal', {y: [[y_filtterd[cntt]]]}, [0])
-    
-            if(cntt > 90) {
-                Plotly.relayout('original-signal',{
-                    xaxis: {
-                        range: [cntt-90,cntt]
-                    },
-                    plot_bgcolor: "#111111",
-                    paper_bgcolor: "#111111"
-                });
-                Plotly.relayout('filtered-signal',{
-                    xaxis: {
-                        range: [cntt-90,cntt]
-                    },
-                    plot_bgcolor: "#111111",
-                    paper_bgcolor: "#111111"
-                });
+    Plotly.extendTraces('filtered-signal', { y: [[y_filtterd[cntt]]] }, [0])
 
-            
-            }
-        cntt++;
-        arr_x.push(cntt);
-    
+    if (cntt > 90) {
+        Plotly.relayout('original-signal', {
+            xaxis: {
+                range: [cntt - 90, cntt]
+            },
+            plot_bgcolor: "#111111",
+            paper_bgcolor: "#111111"
+        });
+        Plotly.relayout('filtered-signal', {
+            xaxis: {
+                range: [cntt - 90, cntt]
+            },
+            plot_bgcolor: "#111111",
+            paper_bgcolor: "#111111"
+        });
+    }
+    cntt++;
+    arr_x.push(cntt);
+
 })
-
-
 
 setTimeout(() => {
     updateAllPassCoeff()

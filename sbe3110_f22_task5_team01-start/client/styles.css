@@ -1,7 +1,6 @@
-html{
+body{
     background-color:#EEE9DA;
-    font-family: "Open Sans";
-    overflow-x: hidden;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .dropdown-check-list {
     display: inline-block;
@@ -56,29 +55,27 @@ html{
     display: block;
 }
 
-#filter-design, #all-pass, #real-time-filter{
+#filter-design-page, #all-pass-page, #real-time-filter{
     display: flex;
-    flex-direction: row;
     column-gap: 10px;
 }
- #all-pass, #real-time-filter{
+ #all-pass-page, #real-time-filter{
     flex-direction: column;
     gap: 10px;
  }
 
 #filter-mag-response, #filter-phase-response{
-    width: 100%;
-    height: 100%;
+    display: flex;
 }
 
 .box {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     background-color: #93BFCF;
     border-radius: 8px;
     padding: 10px;
-    height: 25%;
 }
 .box2{
     /* background-color: #6096B4; */
@@ -90,32 +87,13 @@ html{
     width: 10%;
 
 }
-.response-plotting{
-    padding: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 90%;
-}
-.all-pass-response-container{
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 50%;   
-}
+
 .final-filter-response{
     margin-left: 10px;
     margin-right: 10px;
     width: 50%; 
 }
-/* .box3{
-    background-color: #bacec1;
-} */
-/* .myTable{
-    background-color: #93BFCF;
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
 
-  } */
-  
 .images{
     background-color: #6096B4;
     border-radius: 8px;
@@ -127,24 +105,11 @@ html{
     margin-left: 14px;
     margin-right: 14px;
 }
-/* .images{
-    margin-top: 10px;
-    background-color: #1d3124;
-    border-radius: 8px;
-} */
-
-#filter-response, #all-pass-response, #real-time-filter-plots, #real-time-filter-plots{
-    min-width: 60%;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 10px;
-}
-
-
 
 #all-pass-response, #real-time-filter-plots{
     flex-direction: row;
 }
+
 #circle-control{
     gap: 5px;
     margin-top: 10px;
@@ -211,12 +176,6 @@ html{
     border-radius: 4px;
 }
 
-#all-pass-response-container , .half-plot-container{
-    min-width: 46%;
-    max-height: 48%;
-    margin-left: -5px;
-    margin-right: -5px;
-}
 #final-filter-response{
     min-width: 46%;
     margin-left: -5px;
@@ -250,23 +209,32 @@ html{
 }
 
 .navigation-bar{
-    background-color:  #6096B4;
+    background-color:  #4096B4;
     color: white;
     position: fixed;
     display: flex;
     width: 20%;
     height: 5%;
     border-radius: 10px;
-    left: 8%;
-    bottom:100px;
+    left: 40%;
+    bottom:10px;
     margin-inline-start: 10px;
     padding: 5px;
     justify-content:space-evenly;
 }
 
-.nav-arrow:hover{
+#nav-btn{
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+#nav-btn:hover{
+    color: orange;
     cursor: pointer;
 }
+
 /* ------------------------------------------------------------------------------------------------------------------- */
 #context-menu{
     position: fixed;
@@ -289,3 +257,25 @@ html{
     background: #343434;
 }
 /* ---------------------------------------------------------------------------------------------------------------- */
+
+table,
+td,
+th {
+    border: 3px solid #6096B4;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80px;
+    background-color: #93BFCF;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+
+    margin-top: -10px;
+
+}
+
+th {
+    height: 15px;
+}
+

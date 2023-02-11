@@ -7,37 +7,26 @@ const checkList = document.getElementById('list1');
 const zero_mode_btn = document.getElementById("zero")
 const pole_mode_btn = document.getElementById("pole")
 const modes_btns = [zero_mode_btn, pole_mode_btn]
+const nav_bar = document.getElementById("nav-bar");
+
+let current_page = 0;
+
+const design_filter_page = document.getElementById("filter-design-page");
+const all_pass_filter_page = document.getElementById("all-pass-page");
+
+const nav_btn = document.getElementById("nav-btn");
+
+nav_btn.addEventListener("click", () => {
+    current_page = current_page == 0 ? 1 : 0;
+    nav_btn.innerText = current_page == 0 ? "Correct Phase" : "Apply Phase";
+    design_filter_page.style.display = current_page == 0 ? "flex" : "none";
+    all_pass_filter_page.style.display = current_page == 1 ? "flex" : "none";
+});
 
 let allPassCoeff = []
 document.querySelector('#listOfA').addEventListener(updateAllPassCoeff)
 document.querySelector('#new-all-pass-coef').addEventListener('click', addNewA)
 
-
-let current_page = 0;
-
-const left_nav_arrow = document.getElementById("left-nav-arrow");
-const right_nav_arrow = document.getElementById("right-nav-arrow");
-
-const design_filter_page = document.getElementById("filter-design-page");
-const all_pass_filter_page = document.getElementById("all-pass-page");
-const real_time_filter_page = document.getElementById("real-time-filter");
-
-left_nav_arrow.addEventListener("click", () => {
-    navigate(true);
-})
-
-right_nav_arrow.addEventListener("click", () => {
-    navigate(false);
-})
-
-function navigate(isLeft) {
-    isLeft ?
-        current_page == 0 ? current_page = 2 : current_page-- :
-        current_page == 2 ? current_page = 0 : current_page++;
-    design_filter_page.style.display = current_page == 0 ? "flex" : "none";
-    all_pass_filter_page.style.display = current_page == 1 ? "flex" : "none";
-    real_time_filter_page.style.display = current_page == 2 ? "flex" : "none";
-}
 
 async function postData(url = '', data = {}) {
     const response = await fetch(url, {
