@@ -205,12 +205,6 @@ function updateAllPassCoeff() {
     allPassCoeff
 }
 
-
-
-
-
-
-
 function changeMode(e) {
     unit_circle_mode = modesMap[e.target.id]
     for (btn of modes_btns) {

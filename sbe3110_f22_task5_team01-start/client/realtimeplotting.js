@@ -12,9 +12,10 @@ function Data() {
     return num;
 }
 
-Plotly.plot('original-signal', [{
+Plotly.newPlot('original-signal', [{
     y: [],
     mode: 'lines',
+
     line: { color: '#febc2c' },
 }], {
 
@@ -23,9 +24,10 @@ Plotly.plot('original-signal', [{
 });
 
 console.log(arr_y)
-Plotly.plot('filtered-signal', [{
+Plotly.newPlot('filtered-signal', [{
     y: [],
-    mode: 'lines',
+    // mode: 'lines',
+    type:'scatter',
     line: { color: '#fd413c' }
 }], {
 
@@ -68,25 +70,16 @@ function equateLength(a, b) {
  *
  * @return {Number}             The filterd sample value.
  *
- * -------------------------------------------------------------------------------------
- *                                𝗧𝗿𝗮𝗻𝘀𝗳𝗲𝗿 𝗙𝘂𝗻𝗰𝘁𝗶𝗼𝗻
- *
- *             Y[z]       Σ b[n].z^-n       b0 + b1.z^-1 + .... + bM.z^-M
- *    H[z] = -------- = --------------- = ---------------------------------, a0 = 1
- *             X[z]       Σ a[n].z^-n       1 + a1.z^-1 + .... + aN.z^-N
- *
- *                                𝗗𝗶𝗳𝗳𝗲𝗿𝗲𝗻𝗰𝗲 𝗘𝗾𝘂𝗮𝘁𝗶𝗼𝗻
- *
- *                        Y[n] = Σ b[m].X[n-m] - Σ a[m].Y[n-m]
- * -------------------------------------------------------------------------------------
  */
 function filter(a, b, n, x, y) {
+
+  
     let filter_order = Math.max(a.length, b.length)
     if (a.length != b.length) equateLength(a, b)
     if (n < filter_order) return y[n]
 
     let y_n = b[0] * x[n]
-    for (let m = 1; m < filter_order; m++) {
+    for (let m = 0; m < filter_order; m++) {
         y_n += b[m] * x[n - m] - a[m] * y[n - m]
     }
 
@@ -105,26 +98,27 @@ document.getElementById("generate-signal-container").addEventListener("mousemove
     Plotly.extendTraces('original-signal', { y: [[Data()]] }, [0]);
 
     var y_filtterd = arr_y;
-    y_filtterd[cntt] = filter(a, b, cntt, arr_y, y_filtterd);
-    Plotly.extendTraces('filtered-signal', { y: [[y_filtterd[cntt]]] }, [0])
+    y_filtterd[cntt] = filter(a, b,cntt, arr_y, y_filtterd);
+   
+    Plotly.extendTraces('filtered-signal', {y: [[y_filtterd[cntt]]],  }, [0])
 
-    if (cntt > 90) {
+    if (cntt > 40) {
         Plotly.relayout('original-signal', {
             xaxis: {
-                range: [cntt - 90, cntt]
+                range: [cntt - 40, cntt-20]
             },
             plot_bgcolor: "#111111",
             paper_bgcolor: "#111111"
         });
         Plotly.relayout('filtered-signal', {
             xaxis: {
-                range: [cntt - 90, cntt]
+                range: [cntt - 40, cntt-20]
             },
             plot_bgcolor: "#111111",
             paper_bgcolor: "#111111"
         });
     }
-    cntt++;
+    cntt= cntt +1;
     arr_x.push(cntt);
 
 })
