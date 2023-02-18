@@ -116,12 +116,12 @@ const s = (p5_inst) => {
         let p = p5_inst.createVector(p5_inst.mouseX, p5_inst.mouseY)
         if (curr_picked != NONE_PICKED && isInsideCircle(p, unit_circle_center, radius, 0)) {
             if (!curr_picked.item.conjugate) {
-            p.y = unit_circle_center.y
+                p.y = unit_circle_center.y
                 curr_picked.item.point.center = p
             }
             else {
-            curr_picked.item.point.center = p
-            curr_picked.item.conjugate.center = curr_picked.item.point.getConjugate().center
+                curr_picked.item.point.center = p
+                curr_picked.item.conjugate.center = curr_picked.item.point.getConjugate().center
             }
         }
         updateFilterDesign(filter_plane.getZerosPoles(radius))

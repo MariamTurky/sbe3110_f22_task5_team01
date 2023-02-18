@@ -92,11 +92,6 @@ def getAllPassFilterData():
     else:
         return 'There is no Post request'
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
 @app.route('/differenceEquationCoefficients' , methods=['GET','POST'])
 def differenceEquationCoefficients():
     if request.method == 'POST':
