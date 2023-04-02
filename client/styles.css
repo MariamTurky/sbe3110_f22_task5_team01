@@ -1,0 +1,277 @@
+body{
+    background-color:#EEE9DA;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.dropdown-check-list {
+    display: inline-block;
+}
+
+.dropdown-check-list .anchor {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+}
+.btn-cricle-control, .dropdown-check-list, .anchor{
+    background-color: #212529;
+    color:  #6096B4;
+    font-size: small;
+    font-weight: 600;
+    border: #212529;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+
+.dropdown-check-list .anchor:after {
+    position: absolute;
+    content: "";
+}
+
+.dropdown-check-list .anchor:active:after {
+    right: 8px;
+    top: 21%;
+}
+
+.dropdown-check-list ul.items {
+    padding: 2px;
+    display: none;
+    margin: 0;
+    border-top: none;
+}
+
+.dropdown-check-list ul.items li {
+    list-style: none;
+}
+
+.dropdown-check-list.visible .anchor {
+    font-weight: bold;
+    font-size: 12px;
+    color:  #6096B4;
+}
+
+.dropdown-check-list.visible .items {
+    display: block;
+}
+
+#filter-design-page, #all-pass-page, #real-time-filter{
+    display: flex;
+    flex-direction: column;
+    column-gap: 10px;
+}
+
+.box {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #93BFCF;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+}
+.box2{
+    /* background-color: #6096B4; */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 10%;
+}
+
+.final-filter-response{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50%; 
+}
+
+.image{
+    background-color: #6096B4;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 8px;
+    margin-left: 14px;
+    margin-right: 14px;
+    width: 250px;
+    height: 150px;
+}
+
+
+#all-pass-response, #real-time-filter-plots{
+    flex-direction: row;
+}
+
+#circle-control{
+    gap: 5px;
+    margin-top: 10px;
+}
+
+#circle-control, #circle-canvas, #all-pass-unit-circle, #real-time-filter-container{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5;
+}
+#all-pass-unit-circle, #real-time-filter-container{
+    gap: 10px;
+}
+
+.btn-cricle-control:hover{
+    color: #6096B4;
+    cursor: pointer;
+}
+
+#circle-title, #all-pass-title{
+    text-align: center;
+    color:  #6096B4;
+}
+
+.freq-response-title, .title{
+    margin: 0;
+    color:  #6096B4;
+}
+
+.btn{
+    background-color: #212529;
+    color:  #6096B4;
+    font-size: small;
+    border: #212529;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#new-all-pass-coef{
+    padding: 10px;
+    font-weight: 600;
+}
+
+#csv-submitter, #stop-filtering{
+    padding: 8px;
+    font-weight: 600;
+}
+
+.btn:hover{
+    color: #6096B4;
+    cursor: pointer;
+}
+
+#new-value{
+    max-width: 100px;
+    background-color: #212529;
+    color:  #6096B4;
+    font-size: small;
+    border: #212529;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#final-filter-response{
+    min-width: 46%;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+#all-pass-response-title, #final-filter-response-title{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: large;
+}
+
+#real-time-filter-plots h4{
+    text-align: center;
+    font-size: large;
+    margin-bottom: 5px;
+}
+
+#slider-value{
+    margin-top: 3px;
+    font-weight: bold;
+    color: #0060df;
+}
+
+.response-plotting{
+    min-height:40vh;
+}
+
+#zero{
+    color: #6096B4;
+}
+
+.navigation-bar{
+    background-color:  #4096B4;
+    color: white;
+    position: fixed;
+    display: flex;
+    width: 20%;
+    height: 5%;
+    border-radius: 10px;
+    left: 40%;
+    bottom:10px;
+    margin-inline-start: 10px;
+    padding: 5px;
+    justify-content:space-evenly;
+}
+
+#nav-btn{
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+#nav-btn:hover{
+    color: orange;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+#context-menu{
+    position: fixed;
+    z-index: 10000;
+    width: 170px;
+    background: #1b1a1a;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+.item{
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.item:hover{
+    background: #343434;
+}
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+table,
+td,
+th {
+    border: 3px solid #6096B4;
+}
+
+table {
+    border-collapse: collapse;
+    width: 200px;
+    background-color: #93BFCF;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+
+    margin-top: -10px;
+
+}
+
+th {
+    height: 15px;
+}
+
