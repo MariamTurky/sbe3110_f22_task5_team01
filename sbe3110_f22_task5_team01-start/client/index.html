@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title style="color: #16242c;">Index</title>
+	<script src="lib/danfo.min.js"></script>
+	<script src="lib/p5.min.js"></script>
+	<script src="lib/plotly-2.8.3.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="lib/notyf.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link rel="stylesheet" type="text/css" href="lib/notfy.min.css" />
+</head>
+
+<body>
+	<!------------------------------------------------------------------------------------------------------------------  -->
+	<section id="filter-design-page">
+		<div style="display: flex;">
+			<!-- Design filter in unit circle -->
+			<div class="box" id="design-unit-circle">
+				<h2 id="circle-title" style="color: #16242c; font-size: larger ;">Digital Filter Design</h2>
+				<div id="circle-canvas"></div>
+				<div id="circle-control">
+					<button id="zero" class="btn-cricle-control mode-control">Add Zeros</button>
+					<button id="pole" class="btn-cricle-control mode-control">Add Poles</button>
+				</div>
+				<div id="context-menu">
+					<div class="item" id='remove'>Remove</div>
+					<div class="item" id='remove-poles'>RemovePoles</div>
+					<div class="item" id='remove-all'>RemoveAll</div>
+					<div class="item" id='remove-zeros'>RemoveZeros</div>
+				</div>
+			</div>
+
+			<!-- Magnitude response of designed filter -->
+			<div class="box">
+				<h4 class="freq-response-title title" style="color: #16242c;">Magnitude Response</h4>
+				<div id="filter-mag-response" class="response-plotting"> </div>
+			</div>
+			<!-- Phase response of designed filter -->
+			<div class="box">
+				<h4 class="freq-response-title title" style="color: #16242c;">Phase Response</h4>
+				<div id="filter-phase-response" class="response-plotting"></div>
+			</div>
+		</div>
+
+		<div style="display: flex;">
+
+			<!-- Generate signal using mouse -->
+			<div class="box" style="align-items: center;">
+				<h4 style="color: #16242c;font-size: larger ;">Generate Signal</h4>
+				<div id="generate-signal-container"
+					style="width: 200px ; height:200px;background-color: black;border: 1px solid 0777777;border-radius: 20px;">
+				</div>
+			</div>
+
+			<!-- Generated signal  -->
+			<div class="box">
+				<h4 class="title" id="original-signal-title" style="color: #16242c;">Original Signal</h4>
+				<div class=".half-plot" id="original-signal"></div>
+			</div>
+			<!-- Filtered signal -->
+			<div class="box">
+				<h4 class="title" id="filtered-signal-title" style="color: #16242c;">Filtered Signal</h4>
+				<div class=".half-plot" style="display: flex;" id="filtered-signal"></div>
+			</div>
+		</div>
+
+	</section>
+	<!---------------------------------------------------------------------------------------------------------------------->
+
+	<section id="all-pass-page" style="display: none;">
+
+		<div class="box">
+			<h4 id="final-filter-response-title" class="title" style="color: #16242c;font-size: x-large;">All Pass Phase
+			</h4>
+		</div>
+
+		<div style="display: flex;" id="all-pass-response">
+			<!-- All pass phase response -->
+			<div class="box" id="all-pass-response-container">
+				<h4 class="title" id="all-pass-response-title" style="color: #16242c;">All Pass Phase Response</h4>
+				<div id="all-pass-phase-response" class="response-plotting"> </div>
+			</div>
+
+			<!-- Final phase response -->
+			<div class="box" id="final-filter-response">
+				<h4 id="final-filter-response-title" class="title" style="color: #16242c;">Final Phase Response</h4>
+				<div id="final-filter-phase-response" class="response-plotting"> </div>
+			</div>
+		</div>
+
+		<!-- Catalogue of phases -->
+		<div class="box">
+			<h4 id="final-filter-response-title" class="title" style="color: #16242c;font-size: x-large;">Catalogue</h4>
+		</div>
+		<div style="display: flex; ">
+			<!-- Catalogue left part -->
+			<div class="box" style="flex-direction: row;">
+				<img class="image" id="a1" src="../doc/0.png" onclick="changeImage(1)">
+				<img class="image" id="a2" src="../doc/0.9.png" onclick="changeImage(2)">
+				<img class="image" id="a3" src="../doc/0.5.png" onclick="changeImage(3)">
+			</div>
+			<!-- Table of added coefficients -->
+			<div class="box2">
+				<table id="myTable">
+					<TR>
+						<TD style="color: #16242c;font-weight: bold;">Cofficent value </TD>
+						<TD style="color: #6096B4;">
+							<input type="button" name="button1" value="Remove All" onclick="removeRow('button1')">
+						</TD>
+					</TR>
+				</table>
+			</div>
+			<!-- Catalogue right part -->
+			<div class="box" style="flex-direction: row;">
+				<img class="image" id="a3" src="../doc/0.3.png" onclick="changeImage(4)">
+				<img class="image" id="a3" src="../doc/-0.9.png" onclick="changeImage(5)">
+				<img class="image" id="a3" src="../doc/-0.4.png" onclick="changeImage(6)">
+			</div>
+		</div>
+	</section>
+	<!---------------------------------------------------------------------------------------------------------------------->
+
+	<div class="navigation-bar" id="nav-bar">
+		<button id="nav-btn">Correct Phase</button>
+		<!-- <a href="index.html#all-pass-page">Correct Phase</a>
+		<a href="index.html#filter-design-page">Design/Generate Filter</a> -->
+
+	</div>
+
+	<script src="index.js"></script>
+	<script src="unitcricle.js"></script>
+	<script src="realtimeplotting.js"></script>
+
+</body>
+
+</html>
